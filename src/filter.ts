@@ -1,22 +1,8 @@
 export const createFilter =
-  (domain: URL) => (toVisit: Set<string>, visited: Set<string>) => {
-    return new Set(
-      [...toVisit].filter((urlString) => {
-        if (isInvalidUrl(urlString)) {
-          return false;
-        }
-        const url = new URL(urlString);
-        return url.hostname === domain.hostname && !visited.has(urlString);
-      })
+  (domain: URL) => (toVisit: Set<URL>, visited: Set<string>) => {
+    const filteredToVisit = [...toVisit].filter(
+      (url) => url.hostname === domain.hostname && !visited.has(url.href)
     );
+
+    return new Set(filteredToVisit);
   };
-
-const isInvalidUrl = (urlString: string) => {
-  try {
-    new URL(urlString);
-  } catch {
-    return true;
-  }
-
-  return false;
-};
