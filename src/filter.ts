@@ -4,8 +4,6 @@ export const filter = (domain: URL, toVisit: URL[], visited: Set<string>) => {
     visited.add(url.href);
     return canVisit;
   });
-
-  // return new Set(filteredToVisit);
 };
 
 const canBeVisited = (url: URL, visited: Set<string>, domain: URL) => {
