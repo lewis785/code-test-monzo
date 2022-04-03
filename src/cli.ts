@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import yargs, { exit, string } from "yargs";
+import yargs, { exit } from "yargs";
 import { writeFileSync } from "fs";
 import { SiteMap } from "./types";
 import { crawler } from "./crawler";
@@ -14,6 +14,7 @@ const argv = yargs
     describe: "Starting url for crawler",
   })
   .help()
+  .example("$0 -u https://monzo.com", "Creates site map monzo.com domain")
   .alias("help", "help").argv;
 
 let url: URL;
