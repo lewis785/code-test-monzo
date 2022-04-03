@@ -10,7 +10,7 @@ import {
 jest.mock("axios");
 
 describe("crawler", () => {
-  describe("initial page has links", () => {
+  describe("starting page has links", () => {
     beforeEach(() => {
       axios.get = jest
         .fn()
@@ -47,18 +47,38 @@ describe("crawler", () => {
     });
   });
 
-  describe("initial page has no links", () => {
+  describe("starting page has no links", () => {
     beforeEach(() => {
       axios.get = jest.fn().mockResolvedValue({ data: noLinks });
     });
 
-    it("should call axios get one time", async () => {
+    it("should call axios get once", async () => {
       const response = await crawler(new URL("https://test.com/"));
       expect(axios.get).toBeCalledTimes(1);
       expect(axios.get).toHaveBeenNthCalledWith(1, "https://test.com/");
     });
 
-    it("should return site map", async () => {
+    it("should return site map with no links", async () => {
+      const response = await crawler(new URL("https://test.com/"));
+
+      expect(response).toStrictEqual({
+        "https://test.com/": [],
+      });
+    });
+  });
+
+  describe("starting page 404s", () => {
+    beforeEach(() => {
+      axios.get = jest.fn().mockRejectedValue(new Error("Page does not exist"));
+    });
+
+    it("should call axios get once ", async () => {
+      const response = await crawler(new URL("https://test.com/"));
+      expect(axios.get).toBeCalledTimes(1);
+      expect(axios.get).toHaveBeenNthCalledWith(1, "https://test.com/");
+    });
+
+    it("should return site map with no links", async () => {
       const response = await crawler(new URL("https://test.com/"));
 
       expect(response).toStrictEqual({
