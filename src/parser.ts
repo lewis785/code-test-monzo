@@ -5,10 +5,10 @@ import { parse } from "node-html-parser";
 export const parser = async (url: URL): Promise<UrlMap> => {
   const htmlString = await retrieveHtml(url);
   if (htmlString === null) {
-    return { url, links: new Set([]) };
+    return { url, links: [] };
   }
 
-  return { url, links: new Set(findAndParseLinks(htmlString, url)) };
+  return { url, links: findAndParseLinks(htmlString, url) };
 };
 
 const retrieveHtml = async (url: URL): Promise<string | null> => {

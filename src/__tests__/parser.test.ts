@@ -46,7 +46,7 @@ describe("parse", () => {
       async (_, html, expectedUrls) => {
         axios.get = jest.fn().mockResolvedValue({ data: html });
         const response = await parser(url);
-        expect(response.links).toStrictEqual(new Set(expectedUrls));
+        expect(response.links).toStrictEqual(expectedUrls);
       }
     );
   });
@@ -63,7 +63,7 @@ describe("parse", () => {
 
     it("should contain zero links", async () => {
       const response = await parser(url);
-      expect(response.links.size).toBe(0);
+      expect(response.links.length).toBe(0);
     });
   });
 });

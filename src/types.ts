@@ -1,4 +1,6 @@
 export interface UrlMap {
   url: URL;
-  links: Set<URL>;
+  links: URL[];
 }
+
+export type SiteMap = Record<string, URL[]>;
