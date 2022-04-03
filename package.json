@@ -1,9 +1,9 @@
 {
-  "name": "monzo",
+  "name": "monzo-site-mapper",
   "private": true,
   "version": "0.0.0",
   "bin": {
-    "crawler": "./build/cli.js"
+    "site-mapper": "./build/cli.js"
   },
   "scripts": {
     "build": "tsc",
