@@ -25,7 +25,7 @@ describe("filter", () => {
         new URL("http://stage.test.com"),
         new URL("http://info.test.com"),
       ];
-      expect(filter(domain, toVisit, visited)).toStrictEqual(new Set([]));
+      expect(filter(domain, toVisit, visited)).toStrictEqual([]);
     });
 
     it("should filter out non domain urls", () => {
@@ -34,7 +34,7 @@ describe("filter", () => {
         new URL("http://test.co.uk/contact"),
         new URL("http://square.com/career"),
       ];
-      expect(filter(domain, toVisit, visited)).toStrictEqual(new Set([]));
+      expect(filter(domain, toVisit, visited)).toStrictEqual([]);
     });
   });
 
@@ -49,12 +49,10 @@ describe("filter", () => {
         new URL("http://test.com/contact"),
         new URL("http://test.com/career"),
       ];
-      expect(filter(domain, toVisit, visited)).toStrictEqual(
-        new Set([
-          new URL("http://test.com/contact"),
-          new URL("http://test.com/career"),
-        ])
-      );
+      expect(filter(domain, toVisit, visited)).toStrictEqual([
+        new URL("http://test.com/contact"),
+        new URL("http://test.com/career"),
+      ]);
     });
 
     it("should filter out already visited urls and different domains", () => {
@@ -63,7 +61,7 @@ describe("filter", () => {
         new URL("http://dev.test.com/contact"),
         new URL("http://square.com/career"),
       ];
-      expect(filter(domain, toVisit, visited)).toStrictEqual(new Set([]));
+      expect(filter(domain, toVisit, visited)).toStrictEqual([]);
     });
   });
 });

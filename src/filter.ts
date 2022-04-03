@@ -1,11 +1,11 @@
 export const filter = (domain: URL, toVisit: URL[], visited: Set<string>) => {
-  const filteredToVisit = [...toVisit].filter((url) => {
+  return [...toVisit].filter((url) => {
     const canVisit = canBeVisited(url, visited, domain);
     visited.add(url.href);
     return canVisit;
   });
 
-  return new Set(filteredToVisit);
+  // return new Set(filteredToVisit);
 };
 
 const canBeVisited = (url: URL, visited: Set<string>, domain: URL) => {
