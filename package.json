@@ -2,8 +2,12 @@
   "name": "monzo",
   "private": true,
   "version": "0.0.0",
+  "bin": {
+    "crawler": "./build/cli.js"
+  },
   "scripts": {
     "build": "tsc",
+    "build:watch": "tsc --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -16,6 +20,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "node-html-parser": "^5.3.3"
+    "node-html-parser": "^5.3.3",
+    "yargs": "^17.4.0"
   }
 }
